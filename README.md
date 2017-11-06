@@ -1,1 +1,1 @@
-# p2
+# CS 431 Project 2
