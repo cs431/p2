@@ -139,12 +139,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CPU.cpp" />
+    <ClCompile Include="DataSize.cpp" />
     <ClCompile Include="Driver.cpp" />
+    <ClCompile Include="MMU.cpp" />
+    <ClCompile Include="PageTable.cpp" />
     <ClCompile Include="TBL_Entry.cpp" />
+    <ClCompile Include="VirtualMemoryAddr.cpp" />
     <ClCompile Include="VM_Entry.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CPU.h" />
+    <ClInclude Include="DataSize.h" />
+    <ClInclude Include="MMU.h" />
+    <ClInclude Include="PageTable.h" />
     <ClInclude Include="TBL_Entry.h" />
+    <ClInclude Include="VirtualMemoryAddr.h" />
     <ClInclude Include="VM_Entry.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
