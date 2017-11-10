@@ -10,14 +10,18 @@ using namespace std;
 class VirtualMemoryAddr
 {
 public:
-	VirtualMemoryAddr(char,string);
+	VirtualMemoryAddr(char, string);
+	VirtualMemoryAddr(char,string, double d);
 	bool getWTM();
 	void setWTM(char);
 	string getVMAddr();
 	void setVMAddr(string);
+	double getDec();
+	void setDec(double);
 	~VirtualMemoryAddr();
 private:
 	bool writeToMem;
 	string vmAddr;
+	double dec;
 };
 

@@ -2,9 +2,9 @@
 
 
 
-void MMU::processVMAddr(VirtualMemoryAddr vma)
+void MMU::processVMAddr(VirtualMemoryAddr* vma)
 {
-	if (vma.getWTM()) 
+	if (vma->getWTM()) 
 	{
 		// write to memory
 	}
@@ -15,10 +15,5 @@ void MMU::processVMAddr(VirtualMemoryAddr vma)
 }
 
 MMU::MMU()
-{
-}
-
-
-MMU::~MMU()
 {
 }

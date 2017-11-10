@@ -1,17 +1,33 @@
 #include "CPU.h"
 
-void CPU::initCPU(string fileAddr)
+CPU::CPU()
 {
-	infile.open(fileAddr);
+	
 }
 
-VirtualMemoryAddr CPU::readVirtualMemoryAddr()
+VirtualMemoryAddr* CPU::readVirtualMemoryAddr(string fileAddr)
 {
-	char temp[5] = "";
+	if (!infile.is_open()) 
+	{
+		infile.open(fileAddr);
+	}
+	char writeBit;
+	string vma;
+	double dec;
 	if (!infile.eof()) 
 	{
-		infile.read(temp, 5);
+		infile >> writeBit >> vma;
+		if (writeBit == '1') 
+		{
+			infile >> dec;
+			return new VirtualMemoryAddr(writeBit, vma, dec);
+		}
+		return new VirtualMemoryAddr(writeBit, vma);
 	}
-	string vma(temp);
-	return VirtualMemoryAddr(vma[0], vma.substr(1,vma.size() - 1));
+	else 
+	{
+		infile.close();
+		return NULL;
+	}
+	
 }

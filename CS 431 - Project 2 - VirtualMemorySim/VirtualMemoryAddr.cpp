@@ -6,6 +6,13 @@ VirtualMemoryAddr::VirtualMemoryAddr(char wtm, string vma)
 	setVMAddr(vma);
 }
 
+VirtualMemoryAddr::VirtualMemoryAddr(char wtm, string vma, double d = NULL)
+{
+	setWTM(wtm);
+	setVMAddr(vma);
+	setDec(d);
+}
+
 bool VirtualMemoryAddr::getWTM()
 {
 	return writeToMem;
@@ -31,6 +38,16 @@ string VirtualMemoryAddr::getVMAddr()
 void VirtualMemoryAddr::setVMAddr(string vma)
 {
 	vmAddr = vma;
+}
+
+double VirtualMemoryAddr::getDec()
+{
+	return dec;
+}
+
+void VirtualMemoryAddr::setDec(double d)
+{
+	dec = d;
 }
 
 VirtualMemoryAddr::~VirtualMemoryAddr()

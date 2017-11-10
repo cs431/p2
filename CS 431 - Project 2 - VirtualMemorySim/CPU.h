@@ -15,12 +15,11 @@ using namespace std;
 class CPU
 {
 public:
-	// define static functions here
-	static void initCPU(string);
+	CPU();
 
-	static VirtualMemoryAddr readVirtualMemoryAddr();
+	VirtualMemoryAddr* readVirtualMemoryAddr(string);
 
 private:
-	static ifstream infile;
+	ifstream infile;
 };
 

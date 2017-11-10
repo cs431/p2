@@ -9,9 +9,8 @@ using namespace std;
 class MMU
 {
 public:
-	// define static functions here
-	static void processVMAddr(VirtualMemoryAddr);
-private:
 	MMU();
+	// define static functions here
+	void processVMAddr(VirtualMemoryAddr*);
 };
 
