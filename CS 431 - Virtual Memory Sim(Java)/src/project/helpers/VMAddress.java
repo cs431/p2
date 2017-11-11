@@ -4,22 +4,22 @@ public class VMAddress {
 
     public VMAddress(){}
 
-    public VMAddress(boolean wtm, String ma) {
+    public VMAddress(char wtm, String ma) {
         setWriteToMemory(wtm);
         setMemoryAddress(ma);
     }
 
-    public VMAddress(boolean wtm, String ma, double d){
+    public VMAddress(char wtm, String ma, double d){
         setWriteToMemory(wtm);
         setMemoryAddress(ma);
         setDecimalVal(d);
     }
 
-    public boolean getWriteToMemory() {
+    public char getWriteToMemory() {
         return writeToMemory;
     }
 
-    public void setWriteToMemory(boolean writeToMemory) {
+    public void setWriteToMemory(char writeToMemory) {
         this.writeToMemory = writeToMemory;
     }
 
@@ -39,7 +39,7 @@ public class VMAddress {
         decimalVal = d;
     }
 
-    private boolean writeToMemory;
+    private char writeToMemory;
     private String memoryAddress;
     private double decimalVal;
 }
