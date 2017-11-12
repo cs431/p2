@@ -103,6 +103,7 @@ public class cpu{
         }
         //if read = 1
         else{
+<<<<<<< HEAD
             //located in TLB
             if(entry != -1){
                 //not dirty
@@ -123,6 +124,8 @@ public class cpu{
 
                 }
             }
+=======
+>>>>>>> 673efe349259a30db2ebf2053b061cac18015995
         }
 
 

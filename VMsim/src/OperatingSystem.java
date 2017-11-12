@@ -2,7 +2,10 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.file.Files;
 import java.util.Scanner;
+import java.nio.file.StandardCopyOption;
+import java.nio.file.Paths;
 
 public class OperatingSystem {
 
@@ -25,7 +28,8 @@ public class OperatingSystem {
                     if (hex.length() == 1) {
                         hex = "0" + hex;
                     }
-                    File file = new File("output/Page_Files/" + hex + ".pg");
+
+                    File file = getPageFile(hex);
                     PrintWriter pw = new PrintWriter(new FileWriter(file));
 
                     for (int i = 1; i < 256; i++) {
@@ -39,7 +43,7 @@ public class OperatingSystem {
                 // remove the page from pm and replace with needed page
                 int vpNum = Integer.parseInt(va.substring(0, 2), 16);
                 pm.setPhysMem(clock_hand,0,vpNum);
-                File file = new File("output/Page_Files/" + va.substring(0,2) + ".pg");
+                File file = getPageFile(va.substring(0,2));
                 Scanner scan = new Scanner(file);
                 for (int i = 1; i < 256; i++ ) {
                     pm.setPhysMem(clock_hand, i, scan.nextDouble());
@@ -69,5 +73,11 @@ public class OperatingSystem {
             tlb[i].setR(0);
         }
         vpt.resetTble();
+    }
+    private File getPageFile(String hex) throws IOException{
+        String src = "output/Page_Files/original" + hex + ".pg";
+        String dest = "output/Page_Files/copy" + hex + ".pg";
+        Files.copy(Paths.get(src),Paths.get(dest),StandardCopyOption.REPLACE_EXISTING);
+        return new File(dest);
     }
 }
