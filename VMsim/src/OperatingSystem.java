@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class OperatingSystem {
 
 
-    private int clock_hand;
+    private int clock_hand = 0;
 
     public int handlePageFault(String va, physicalMemory pm, pageTable vpt) throws IOException {
 

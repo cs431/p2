@@ -45,24 +45,88 @@ public class cpu{
         System.out.println("Read/Write: " + r);
 
         int entry = checkTLB(va);
-        if(entry != -1){
-            if(tlbEntries[entry].getD() != 0) {
-                sMiss = false;
-                hardmiss = false;
-                hit = true;
-                tlbEntries[entry].setR(1);
-                tlbEntries[entry].setV(1);
+        //vAdress is located in TLB
+        if(r == 0) {
+            //located in TLB
+            if (entry != -1) {
+                //dirty bit = 0
+                if (tlbEntries[entry].getD() == 0) {
+                    sMiss = false;
+                    hardmiss = false;
+                    hit = true;
+                    tlbEntries[entry].setR(1);
+                    tlbEntries[entry].setV(1);
 
-                if(physMem.getPysMem(tlbEntries[entry].getVirtualPageNum(),offset) == -1){
+                    if (physMem.getPysMem(tlbEntries[entry].getVirtualPageNum(), offset) == -1) {
+                        dirtybit = os.handlePageFault(vAdress, physMem, VPT);
+                        value = physMem.getPysMem(VPT.getPageFrame(va), offset);
+                    } else {
+                        value = physMem.getPysMem(tlbEntries[entry].getVirtualPageNum(), offset);
+                    }
+                }
+                //Tlb entry is dirty
+                else if (tlbEntries[entry].getD() == 1) {
+                    sMiss = false;
+                    hardmiss = false;
                     dirtybit = os.handlePageFault(vAdress, physMem, VPT);
+                    value = physMem.getPysMem(VPT.getPageFrame(va), offset);
+                }
+
+            }
+            //not found in TLB softmiss hardmiss
+            else {
+                if (sMiss) {
+                    int pgFrame = VPT.getPageFrame(va);
+                    if (pgFrame < 16 && VPT.getD(va) == 0) {
+                        hardmiss = false;
+                        VPT.setR(va, 1);
+                        VPT.setV(va, 1);
+                        //page fault
+                        if (physMem.getPysMem(pgFrame, offset) == -1) {
+                            dirtybit = os.handlePageFault(vAdress, physMem, VPT);
+                            value = physMem.getPysMem(VPT.getPageFrame(va), offset);
+                        } else {
+                            value = physMem.getPysMem(pgFrame, offset);
+                            TLB(va, pgFrame);
+                        }
+                    } else if (pgFrame < 16 && VPT.getD(va) == 1) {
+                        hardmiss = false;
+                        dirtybit = os.handlePageFault(vAdress, physMem, VPT);
+                        value = physMem.getPysMem(VPT.getPageFrame(va), offset);
+                    }
+                } else if (hardmiss) {
+                    dirtybit = os.handlePageFault(vAdress, physMem, VPT);
+                    value = physMem.getPysMem(VPT.getPageFrame(va), offset);
+                }
+
+            }
+        }
+        //if read = 1
+        else{
+            //located in TLB
+            if(entry != -1){
+                //not dirty
+                if(tlbEntries[entry].getD() == 0){
+
+                }
+                //dirty
+                else if(tlbEntries[entry].getD() == 1){
+
                 }
             }
+            //softmiss or hardmiss occurs
+            else{
+                if(sMiss){
 
+                }
+                else if(hardmiss){
+
+                }
+            }
         }
-        else{
+ 
 
 
-        }
 
     }
     public static int checkTLB(int vAdress){
