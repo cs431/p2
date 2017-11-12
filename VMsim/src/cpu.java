@@ -9,6 +9,7 @@ public class cpu{
     public static physicalMemory physMem = new physicalMemory();
     public static OperatingSystem os = new OperatingSystem();
     public static pageTable VPT = new pageTable();
+    public static int pointer = 7;
 
     public static void main(String[] args) throws IOException{
         Scanner keyboard = new Scanner(System.in);
@@ -78,5 +79,32 @@ public class cpu{
             tlbEntries[i] = entries;
         }
     }
+    //This is wrong will find a better way to FIFO tom.
+    public static void TLB(int vNum,int pageFrame){
+        int index = 0;
+        boolean room = false;
+        for (int i = 0; i < 8; i++) {
+            if (tlbEntries[i].getPageFrame() == -1) {
+                index = i;
+                room = true;
+            }
+        }
+
+        if (room == false) {
+            if (pointer + 1 == tlbEntries.length) {
+                pointer = 0;
+            } else {
+                pointer += 1;
+            }
+            index = pointer;
+        }
+
+        tlbEntries[index].setV(1);
+        tlbEntries[index].setD(0);
+        tlbEntries[index].setR(1);
+        tlbEntries[index].setPageFrame(pageFrame);
+        tlbEntries[index].setVPN(vNum);
+    }
+
 
 }
