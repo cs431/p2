@@ -1,8 +1,6 @@
 import java.io.*;
 import java.util.Scanner;
 
-import static javax.swing.text.html.HTML.Tag.HEAD;
-
 /**
  * Created by Spencer on 11/11/2017.
  */
@@ -103,33 +101,48 @@ public class cpu{
 
             }
         }
-        //if read = 1
+        //if read = 1 aka write
         else{
             //located in TLB
             if(entry != -1){
-                //not dirty
-                if(tlbEntries[entry].getD() == 0){
+                sMiss = false;
+                hardmiss = false;
+                hit = true;
+                tlbEntries[entry].setV(1);
+                tlbEntries[entry].setD(1);
+                tlbEntries[entry].setR(1);
 
-                }
-                //dirty
-                else if(tlbEntries[entry].getD() == 1){
+                if (physMem.getPysMem(tlbEntries[entry].getVirtualPageNum(),offset) == -1) {
 
-                }
-            }
-            //softmiss or hardmiss occurs
-            else{
-                if(sMiss){
+                    dirtybit= os.handlePageFault(vAdress, physMem, VPT);
+                    physMem.setPhysMem(VPT.getPageFrame(va), offset, value);
 
-                }
-                else if(hardmiss){
-
+                } else {
+                    physMem.setPhysMem(tlbEntries[entry].getPageFrame(),offset, value);
                 }
             }
-
+            if(sMiss){
+                int pgFrame = VPT.getPageFrame(va);
+                if(pgFrame < 16){
+                    hardmiss = false;
+                    VPT.setV(va,1);
+                    VPT.setR(va,1);
+                    VPT.setD(va,1);
+                    if(physMem.getPysMem(pgFrame,offset) == -1){
+                        dirtybit= os.handlePageFault(vAdress, physMem, VPT);
+                        physMem.setPhysMem(VPT.getPageFrame(va), offset, value);
+                    }
+                    else{
+                        physMem.setPhysMem(pgFrame,offset,value);
+                        TLB(va,pgFrame);
+                    }
+                }
+            }
+            if(hardmiss){
+                dirtybit= os.handlePageFault(vAdress, physMem, VPT);
+                physMem.setPhysMem(VPT.getPageFrame(va), offset, value);
+            }
         }
-
-
-
 
     }
     public static int checkTLB(int vAdress){
