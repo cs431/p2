@@ -1,6 +1,8 @@
 import java.io.*;
 import java.util.Scanner;
 
+import static javax.swing.text.html.HTML.Tag.HEAD;
+
 /**
  * Created by Spencer on 11/11/2017.
  */
@@ -103,7 +105,6 @@ public class cpu{
         }
         //if read = 1
         else{
-<<<<<<< HEAD
             //located in TLB
             if(entry != -1){
                 //not dirty
@@ -124,8 +125,7 @@ public class cpu{
 
                 }
             }
-=======
->>>>>>> 673efe349259a30db2ebf2053b061cac18015995
+
         }
 
 
