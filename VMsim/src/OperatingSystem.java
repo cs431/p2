@@ -6,15 +6,8 @@ import java.util.Scanner;
 
 public class OperatingSystem {
 
-    private LinkedList clock = new LinkedList();
-    private int clock_hand;
 
-    public OperatingSystem() {
-        for (int i = 0; i < 16; i++) {
-            clock.addNodeAtEnd(i);
-        }
-        clock_hand = 0;
-    }
+    private int clock_hand;
 
     public int handlePageFault(String va, physicalMemory pm, pageTable vpt) throws IOException {
 
