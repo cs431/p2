@@ -2,6 +2,8 @@ package project.helpers;
 
 public class ClockReplacement {
 	
+public class ClockReplacement {
+	
 	public Node start = null;
 	public Node end = null;
 	public int size = 0;
@@ -10,8 +12,8 @@ public class ClockReplacement {
 		private int data;
 		private Node link;
 		
-	    public Node(int physMem) {
-	    		this.data = physMem;
+	    public Node(int dat) {
+	    		this.data = dat;
 		}
 
 		public void setLink(Node n)
@@ -32,6 +34,22 @@ public class ClockReplacement {
             end.setLink(n);
             end = n;            
         }
-        size++;
+        size++ ;
+    }
+	
+    public double elementAt(int index) {
+        if (index > size) {
+            return -1;
+        }
+        Node n = start;
+        while (index - 1 != 0) {
+            n = n.link;
+            index--;
+        }
+        return n.data;
+    }
+
+    public int getSize() {
+        return size;
     }
 }
