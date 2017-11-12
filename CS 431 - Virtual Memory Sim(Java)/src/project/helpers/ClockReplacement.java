@@ -2,8 +2,6 @@ package project.helpers;
 
 public class ClockReplacement {
 	
-public class ClockReplacement {
-	
 	public Node start = null;
 	public Node end = null;
 	public int size = 0;

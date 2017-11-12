@@ -11,7 +11,15 @@ public class TLB {
 		this.virtualPageNum = -1;
 		this.pageFrameNum = -1;
 	}
-	
+
+	public TLB(int v_bit, int r_bit, int d_bit, int vpnNum, int pfn){
+		v = v_bit;
+		r = r_bit;
+		d = d_bit;
+		virtualPageNum = vpnNum;
+		pageFrameNum = pfn;
+	}
+
 	public int getVirtualPageNum() {
 		return virtualPageNum;
 	}
