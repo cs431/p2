@@ -75,8 +75,8 @@ public class OperatingSystem {
         vpt.resetTble();
     }
     private File getPageFile(String hex) throws IOException{
-        String src = "output/Page_Files/original" + hex + ".pg";
-        String dest = "output/Page_Files/copy" + hex + ".pg";
+        String src = "output/page_files/original" + hex + ".pg";
+        String dest = "output/page_files/copy" + hex + ".pg";
         Files.copy(Paths.get(src),Paths.get(dest),StandardCopyOption.REPLACE_EXISTING);
         return new File(dest);
     }
