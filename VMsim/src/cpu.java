@@ -13,15 +13,24 @@ public class cpu{
 
     public static void main(String[] args) throws IOException{
         Scanner keyboard = new Scanner(System.in);
-        System.out.println("Enter Text with Virtual Adresses");
-        File inFile = new File("test_files\\" + "test_1" + ".txt");
+        
+        File inFile = new File(args[0]);
+        if (!inFile.canRead()) {
+            System.out.println("Enter a valid file and try again.");
+            System.exit(0);
+        }
+        
+        if (args.length < 1) {
+            System.out.println("Enter the file name as a command line argument and try again.");
+            System.exit(0);
+        }
+        
         Scanner input = new Scanner(inFile);
         createTLB();
 
         while(input.hasNext()){
             int rw = 0;
             rw = input.nextInt();
-            System.out.println(rw);
 
             double decimal = 0;
             String virtualAdresss;
@@ -38,7 +47,7 @@ public class cpu{
         boolean sMiss = true;
         boolean hardmiss = true;
         boolean hit = false;
-        int dirtybit = 0;
+        int dirtybit = 1;
         int va = Integer.parseInt(vAdress.substring(0,2), 16);
         int offset = Integer.parseInt(vAdress.substring(2,4),16);
         System.out.println("The address called for:\n" + vAdress);
