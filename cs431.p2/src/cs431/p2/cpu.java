@@ -15,16 +15,15 @@ public class cpu{
     
     public static void main(String[] args) throws IOException{
         Scanner keyboard = new Scanner(System.in);
-//      System.out.println("Enter Text with Virtual Adresses");
-//      File inFile = new File("test_files\\" + "test_1" + ".txt");
-        if (args.length != 1) {
-            System.out.println("Please pass in a file.");
-            System.exit(0);
-        }
         
         File inFile = new File(args[0]);
         if (!inFile.canRead()) {
-            System.out.println("Cannot read specified file.");
+            System.out.println("Enter a valid file and try again.");
+            System.exit(0);
+        }
+        
+        if (args.length < 1) {
+            System.out.println("Enter the file name as a command line argument and try again.");
             System.exit(0);
         }
         
