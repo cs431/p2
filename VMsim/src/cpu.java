@@ -143,6 +143,12 @@ public class cpu{
                 physMem.setPhysMem(VPT.getPageFrame(va), offset, value);
             }
         }
+        
+        System.out.println("Dirty Bit: " + dirtybit);
+        System.out.println("Soft Miss: " + sMiss);
+        System.out.println("Hard Miss: " + hardmiss);
+        System.out.println("Hit: " + hit);
+        System.out.println("Value: " + value + "\n");
 
     }
     public static int checkTLB(int vAdress){

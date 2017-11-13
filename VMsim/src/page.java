@@ -13,10 +13,10 @@ public class page {
         r = 0;
         d = 0;
     }
-    public void setV( int valid){ valid = v;}
-    public void setR(int read){read = r;}
-    public void setD(int dirty){dirty = d;}
-    public void setPageFrame(int p){p = pageFrame;}
+    public void setV( int valid){ v = valid; }
+    public void setR(int read){ r = read; }
+    public void setD(int dirty){ d = dirty; }
+    public void setPageFrame(int p){ pageFrame = p; }
     public int getV(){return v;}
     public int getR(){return r;}
     public int getD(){return d;}
