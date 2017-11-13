@@ -29,6 +29,7 @@ public class cpu{
         
         Scanner input = new Scanner(inFile);
         createTLB();
+        int instrCount = 0;
         
         while(input.hasNext()){
             int rw = 0;
@@ -41,7 +42,16 @@ public class cpu{
             if(rw == 1){
                 decimal = input.nextDouble();
             }
-            MMU(rw, virtualAdresss, decimal);
+            try {
+                MMU(rw, virtualAdresss, decimal);
+                instrCount++;
+                
+                if (instrCount % 5 == 0) {
+                    os.resetTables(tlbEntries, VPT);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         keyboard.close();
     }
